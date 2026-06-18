@@ -1,0 +1,700 @@
+/* styles.css — Estilizado profesional para NoteSpace */
+
+/* Tipografías */
+:root{
+  --accent: #4f46e5;        /* Indigo 600 (acento primario) */
+  --accent-600: #3730a3;
+  --accent-200: #c7c6ff;
+  --muted: #6b7280;        /* gris para etiquetas / subtítulos */
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --text: #0f172a;
+  --card: #ffffff;
+  --success: #10b981;
+  --danger: #ef4444;
+  --glass: rgba(255,255,255,0.6);
+  --shadow: 0 8px 20px rgba(15,23,42,0.06);
+  --radius: 12px;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #7c3aed 100%);
+}
+
+/* Modo dark variables (aplicadas cuando data-theme="dark") */
+[data-theme="dark"]{
+  --bg: #0b0c0d;
+  --surface: #071014;
+  --card: #0f1722;
+  --text: #e6eef6;
+  --muted: #9aa6b2;
+  --glass: rgba(255,255,255,0.04);
+  --shadow: 0 8px 28px rgba(2,6,23,0.6);
+}
+
+/* Global */
+html,body{
+  height:100%;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* brand */
+.brand-title{
+  font-weight:700;
+  font-family: "Playfair Display", serif;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+/* HERO */
+.hero{
+  padding-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+.hero-title{
+  font-family: "Playfair Display", serif;
+  font-weight:600;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+.hero .accent{
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* hero card */
+.hero-card{
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+  box-shadow: var(--shadow);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.hero-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.12);
+}
+
+/* Features grid */
+.features-grid{
+  display:flex;
+  gap:1rem;
+  margin-top:1.5rem;
+  flex-wrap:wrap;
+}
+.feature-item{
+  background: var(--surface);
+  padding:10px 12px;
+  border-radius:10px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.03);
+  min-width: 135px;
+}
+
+/* Info cards */
+.info-card{
+  border-radius:12px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.info-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(2,6,23,0.08);
+}
+
+/* Color swatches */
+.color-swatch{
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
+/* cards (notes) */
+.card{
+  border-radius:12px;
+  background: var(--card);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(2,6,23,0.06);
+}
+
+/* Buttons: primary accent */
+.btn-primary{
+  background: var(--accent);
+  border: 0;
+  box-shadow: 0 8px 20px rgba(79,70,229,0.12);
+}
+.btn-primary:hover{
+  background: var(--accent-600);
+}
+
+/* small UI details */
+.navbar .btn-theme-toggle{
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius:8px;
+  padding:6px 8px;
+}
+
+/* responsive tweaks */
+@media (max-width: 767px){
+  .hero-title{ font-size:1.6rem; }
+  .features-grid{ gap:0.6rem; }
+}
+
+/* subtle fade-in animation for sections */
+.fade-in {
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.fade-in.visible {
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Accessibility: focus visible */
+a:focus, button:focus, input:focus {
+  outline: 3px solid rgba(79,70,229,0.18);
+  outline-offset: 2px;
+  border-radius:8px;
+}
+/* ===== Note cards & badges ===== */
+.note-card{
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+  transition: transform .22s ease, box-shadow .22s ease;
+  box-shadow: 0 10px 26px rgba(2,6,23,0.06);
+}
+.note-card .card-body { padding: 18px; }
+.note-title { font-weight:600; font-size:1.05rem; margin-bottom:0; }
+.note-excerpt { font-size:0.95rem; line-height:1.3; }
+
+/* Accent badges (tags) */
+.badge-accent{
+  background: var(--accent-200);
+  color: var(--accent-600);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: 0 6px 18px rgba(79,70,229,0.06);
+}
+.badge-accent:hover,
+.badge-accent:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(79,70,229,0.12);
+  text-decoration: none;
+}
+
+/* Card hover */
+.note-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 24px 48px rgba(2,6,23,0.12);
+}
+
+/* Layout tweaks: ensure nice spacing inside grid */
+.row.g-3 > .col-12 > .note-card { height: 100%; }
+
+/* ===== Button transitions & ripple ===== */
+
+/* Base transition for buttons */
+.btn, .btn-ripple {
+  transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease, color .12s ease;
+}
+
+/* Slight lift on hover */
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.08);
+}
+
+/* Ripple container: relative positioning */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ripple pseudo-element (will be created by JS) */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-effect 600ms linear;
+  background: rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+
+/* dark ripple variant for outline/danger where bg is light */
+.btn-outline-primary .ripple { background: rgba(79,70,229,0.12); }
+.btn-outline-danger .ripple { background: rgba(239,68,68,0.12); }
+
+/* animation */
+@keyframes ripple-effect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* focus visible for keyboard users */
+.btn:focus {
+  outline: 3px solid rgba(79,70,229,0.18);
+  outline-offset: 3px;
+}
+/* ===== Startup Colorful additions ===== */
+
+/* Hero creative */
+.hero-creative {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+/* Accent text gradient */
+.hs-accent {
+  background: linear-gradient(90deg, #ff7ab6 0%, #ffb86b 40%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+/* CTA styles */
+.btn-cta {
+  background: linear-gradient(90deg, #ff7ab6 0%, #7c3aed 100%);
+  color: white;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(124,58,237,0.14);
+}
+.btn-cta:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(124,58,237,0.18); }
+
+.btn-cta-outline {
+  color: var(--text);
+  border: 1px solid rgba(15,23,42,0.06);
+  background: transparent;
+  padding: 12px 20px;
+  border-radius: 12px;
+}
+
+/* quick features */
+.features-quick li { margin-bottom: 6px; color: var(--muted); }
+
+/* Stats */
+.stat { margin-right: 18px; }
+.stat-value { font-weight:700; font-size:1.25rem; }
+.stat-label { font-size:0.8rem; color:var(--muted); }
+
+/* Device mockup */
+.device-mockup { display:flex; justify-content:center; }
+.mockup-window {
+  width: 320px;
+  border-radius: 18px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.55));
+  box-shadow: 0 22px 48px rgba(15,23,42,0.08);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.mockup-note {
+  border-radius: 12px;
+  padding: 12px;
+  color: white;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 22px rgba(2,6,23,0.08);
+}
+.note-gradient-1 { background: linear-gradient(90deg,#ff7ab6,#ffb86b); }
+.note-gradient-2 { background: linear-gradient(90deg,#7c3aed,#6366f1); }
+.note-gradient-3 { background: linear-gradient(90deg,#06b6d4,#7dd3fc); }
+.mockup-title { font-weight:700; margin-bottom:6px; }
+.mockup-text { font-size:0.82rem; opacity:0.95; }
+
+/* Feature cards and testimonials */
+.feature-card { border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); box-shadow: var(--shadow); transition: transform .18s ease; }
+.feature-card:hover { transform: translateY(-6px); }
+.testimonial { border-radius:12px; background: var(--card); box-shadow: var(--shadow); }
+
+/* CTA band */
+.cta-band { border-radius: 12px; background: linear-gradient(90deg,#fff0f6, #f7f5ff); padding:18px; box-shadow: 0 14px 36px rgba(15,23,42,0.04); }
+
+/* responsive */
+@media (max-width: 768px) {
+  .mockup-window { width: 100%; }
+  .hero-creative { padding-top:2rem; padding-bottom:2rem; }
+}
+
+/* ensure fade-in items visible */
+.fade-in { opacity:0; transform: translateY(8px); transition: opacity .6s ease, transform .6s ease; }
+.fade-in.visible { opacity:1; transform: translateY(0); }
+/* ----------------------------------------------
+   HOVER — BOTONES
+---------------------------------------------- */
+
+.btn-cta:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.btn-cta-outline:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: rgba(255,255,255,0.15);
+}
+
+
+/* ----------------------------------------------
+   HOVER — FEATURE CARDS
+---------------------------------------------- */
+.feature-card {
+    transition: all 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+
+/* ----------------------------------------------
+   HOVER — MOCKUP NOTES
+---------------------------------------------- */
+.mockup-note {
+    transition: all 0.3s ease;
+}
+
+.mockup-note:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+/* ----------------------------------------------
+   HOVER — NAVBAR LINKS
+---------------------------------------------- */
+.nav-link {
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--hs-accent);
+}
+
+
+/* ----------------------------------------------
+   FADE-IN ON SCROLL
+---------------------------------------------- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all .6s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ----------------------------------------------
+   FEATURE CARDS — HOVER INTERACTION (RESTORED)
+---------------------------------------------- */
+
+.feature-card {
+    border-radius: 14px;
+    background: var(--hs-surface);
+    transition: all 0.25s ease, transform 0.25s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow sutil al pasar el mouse */
+.feature-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--hs-accent) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.feature-card:hover::before {
+    opacity: 0.12;
+}
+
+/* Movimiento + sombra */
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.15);
+}
+
+/* Icono animado */
+.feature-card .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    transition: transform .25s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.25) rotate(4deg);
+}
+/* -----------------------------------------------------------
+   PREMIUM FEATURE CARDS ✨ — Startup Edition
+   Elevación, border animado, glassmorphism y hover dinámico
+----------------------------------------------------------- */
+
+.feature-card {
+    position: relative;
+    padding: 2rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.35s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Border animado */
+.feature-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+        130deg,
+        #ff7ee5,
+        #6a89ff,
+        #5cf5d2,
+        #ffdd57,
+        #ff7ee5
+    );
+    background-size: 400% 400%;
+    animation: borderFlow 8s ease infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+@keyframes borderFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hover: activa el borde brillante */
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+/* Glow interno */
+.feature-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right,
+        rgba(255,255,255,0.25),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+}
+
+.feature-card:hover::after {
+    opacity: 1;
+}
+
+/* Elevación premium */
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+        0 18px 38px rgba(0,0,0,0.22),
+        0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Icon animation */
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    display: inline-block;
+    transition: transform .35s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.35) rotate(8deg);
+}
+/* Ripple effect (click feedback) */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card:active::after {
+    content: "";
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: ripple .6s ease-out;
+}
+
+@keyframes ripple {
+    to {
+        width: 400px;
+        height: 400px;
+        opacity: 0;
+    }
+}
+/* ----------------------------------------------------
+   CTA PREMIUM — Startup Animated Buttons
+---------------------------------------------------- */
+
+.btn-cta {
+    background: linear-gradient(135deg, #7f5cff, #4acbff);
+    color: #ffffff !important;
+    font-weight: 600;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    transition: all .25s ease, transform .25s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(127, 92, 255, 0.35);
+}
+
+/* Animated gradient glow */
+.btn-cta::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.45), transparent 70%);
+    transform: scale(0);
+    transition: transform .45s ease-out;
+    pointer-events: none;
+}
+
+/* Hover effect */
+.btn-cta:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(127, 92, 255, 0.45);
+}
+
+.btn-cta:hover::before {
+    transform: scale(1.3);
+}
+
+/* Ripple effect */
+.btn-cta:active::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: rgba(255,255,255,0.65);
+    border-radius: 50%;
+    animation: ripple-btn .45s ease-out;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+@keyframes ripple-btn {
+    from { opacity: 0.8; transform: translate(-50%, -50%) scale(0.3); }
+    to   { opacity: 0; transform: translate(-50%, -50%) scale(3.2); }
+}
+
+/* ----------------------------------------------------
+   CTA OUTLINE PREMIUM
+---------------------------------------------------- */
+
+.btn-cta-outline {
+    background: transparent;
+    border-radius: 14px;
+    padding: 12px 32px;
+    border: 2px solid rgba(127, 92, 255, 0.5);
+    color: var(--hs-text);
+    font-weight: 600;
+    transition: all .25s ease, transform .25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover glow */
+.btn-cta-outline:hover {
+    transform: translateY(-6px);
+    border-color: #7f5cff;
+    box-shadow: 0 8px 18px rgba(127, 92, 255, 0.35);
+}
+
+.btn-cta-outline:hover::before {
+    opacity: 0.12;
+}
+
+/* Ripple effect outline */
+.btn-cta-outline:active::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: rgba(127,92,255,0.35);
+    border-radius: 50%;
+    animation: ripple-btn-outline .35s ease-out;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+@keyframes ripple-btn-outline {
+    from { opacity: 0.9; transform: translate(-50%, -50%) scale(0.4); }
+    to   { opacity: 0; transform: translate(-50%, -50%) scale(2.5); }
+}
+
+
+/* ===== Auth screens (login / register) ===== */
+.auth-card{
+  border-radius: 18px;
+  border: 1px solid rgba(148,163,184,0.25);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(248,250,252,0.98));
+  box-shadow: var(--shadow);
+}
+
+.brand-mark{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--accent-gradient, linear-gradient(135deg,#4f46e5,#6366f1));
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.auth-alt-link a{
+  text-decoration: none;
+  color: var(--accent-600, #3730a3);
+  font-weight: 500;
+}
+.auth-alt-link a:hover{
+  text-decoration: underline;
+}

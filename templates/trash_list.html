@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Papelera{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Papelera</h2>
+    <div>
+      <a class="btn btn-outline-secondary" href="{{ url_for('notes_list') }}">Volver a notas</a>
+    </div>
+  </div>
+
+  {% if notes %}
+    <div class="list-group">
+      {% for note in notes %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <h6 class="mb-1">{{ note.title }}</h6>
+            <small class="text-muted">Última edición: {{ note.updated_at.strftime('%Y-%m-%d') }}</small>
+          </div>
+          <div>
+            <form method="POST" action="{{ url_for('trash_restore', note_id=note.id) }}" class="d-inline">
+              <button class="btn btn-sm btn-outline-success me-2">Restaurar</button>
+            </form>
+            <form method="POST" action="{{ url_for('trash_delete_permanent', note_id=note.id) }}" class="d-inline" onsubmit="return confirm('Eliminar permanentemente?');">
+              <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">La papelera está vacía.</p>
+  {% endif %}
+{% endblock %}

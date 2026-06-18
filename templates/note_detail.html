@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}{{ note.title }} — NoteSpace{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-start mb-3">
+  <div>
+    <h2 class="mb-1">{{ note.title }}</h2>
+    <small class="text-muted">
+      Creada: {{ note.created_at.strftime('%Y-%m-%d %H:%M') }}
+      · Última edición: {{ note.updated_at.strftime('%Y-%m-%d %H:%M') }}
+    </small>
+    <div class="mt-2">
+      {% if note.tags %}
+        {% for t in note.tags.split(',') %}
+          <a class="badge badge-accent me-1" href="{{ url_for('notes_list') }}?tag={{ t }}">{{ t }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-primary btn-sm btn-ripple"
+       href="{{ url_for('notes_edit', note_id=note.id) }}">
+      Editar
+    </a>
+    <form method="POST"
+          action="{{ url_for('notes_delete', note_id=note.id) }}"
+          onsubmit="return confirm('Enviar nota a la papelera?');">
+      <button class="btn btn-outline-danger btn-sm btn-ripple">Borrar</button>
+    </form>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <p class="mb-0" style="white-space: pre-wrap;">{{ note.content or '— Sin contenido —' }}</p>
+  </div>
+</div>
+
+<div class="mt-3">
+  <h6 class="text-muted mb-1">Compartir nota</h6>
+
+  {% if note.is_public and note.public_token %}
+    <div class="small mb-2">
+      <div class="input-group input-group-sm">
+        <input
+          type="text"
+          class="form-control"
+          readonly
+          value="{{ url_for('shared_note_view', token=note.public_token, _external=True) }}"
+          id="publicLinkInput"
+        >
+        <button class="btn btn-outline-secondary" type="button"
+                onclick="navigator.clipboard.writeText(document.getElementById('publicLinkInput').value)">
+          Copiar
+        </button>
+      </div>
+      <div class="form-text">
+        Cualquiera con este enlace puede ver la nota (solo lectura).
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('notes_toggle_share', note_id=note.id) }}">
+      <input type="hidden" name="action" value="disable">
+      <button class="btn btn-outline-warning btn-sm btn-ripple">
+        Desactivar enlace público
+      </button>
+    </form>
+  {% else %}
+    <form method="POST" action="{{ url_for('notes_toggle_share', note_id=note.id) }}">
+      <input type="hidden" name="action" value="enable">
+      <button class="btn btn-outline-secondary btn-sm btn-ripple">
+        Generar enlace público
+      </button>
+    </form>
+    <div class="form-text small">
+      Al activar, se generará un enlace para compartir esta nota en modo solo lectura.
+    </div>
+  {% endif %}
+</div>
+
+<a class="btn btn-link mt-4" href="{{ url_for('notes_list') }}">← Volver a mis notas</a>
+{% endblock %}

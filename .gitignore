@@ -1,0 +1,51 @@
+# ========================
+# Entorno virtual
+# ========================
+venv/
+env/
+.venv/
+
+# ========================
+# Base de datos
+# ========================
+instance/
+*.db
+*.db.bak
+*.sqlite3
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ========================
+# Variables de entorno
+# ========================
+.env
+.env.local
+*.env
+
+# ========================
+# IDEs y editores
+# ========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ========================
+# Sistema operativo
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# Logs
+# ========================
+*.log
+logs/

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block title %}NoteSpace — Organiza, Comparte y Crea{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-creative py-6">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+
+      <!-- TEXT SIDE -->
+      <div class="col-12 col-lg-6">
+        <h1 class="display-5 hero-creative-title">
+          Tu espacio para ideas,
+          <span class="hs-accent">rápido</span>
+          y
+          <span class="hs-accent">colorido</span>.
+        </h1>
+
+        <p class="lead text-muted mb-4">
+          NoteSpace combina simplicidad con potencia. Etiquetas, búsqueda instantánea,
+          papelera y modo claro/oscuro — todo diseñado para que te concentres en crear.
+        </p>
+
+        <div class="d-flex gap-3 flex-wrap">
+          <a class="btn btn-cta btn-lg btn-ripple" href="{{ url_for('register') }}">Empieza gratis</a>
+          <a class="btn btn-cta-outline btn-lg btn-ripple" href="{{ url_for('notes_list') }}">Ver notas</a>
+        </div>
+
+        <ul class="list-unstyled mt-4 features-quick">
+          <li><strong>⚡ Guardado rápido</strong> — flujo sin fricciones.</li>
+          <li><strong>🏷️ Etiquetas</strong> — organiza por contexto.</li>
+          <li><strong>🗑️ Papelera</strong> — recupera si te equivocas.</li>
+        </ul>
+
+        <div class="mt-4 d-flex gap-3">
+          <div class="stat">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Integrantes (simulado)</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">100+</div>
+            <div class="stat-label">Notas creadas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOCKUP SIDE -->
+      <div class="col-12 col-lg-6">
+        <div class="device-mockup d-flex justify-content-center">
+          <div class="mockup-window shadow-sm">
+
+            <!-- STATIC CLEAN DEMO NOTES -->
+            <div class="mockup-note note-gradient-1">
+              <div class="mockup-title">Bienvenido a NoteSpace</div>
+              <div class="mockup-text">Organiza tus ideas de forma rápida, simple y visual.</div>
+            </div>
+
+            <div class="mockup-note note-gradient-2">
+              <div class="mockup-title">Etiquetas y Búsqueda</div>
+              <div class="mockup-text">Encuentra notas al instante con filtros inteligentes.</div>
+            </div>
+
+            <div class="mockup-note note-gradient-3">
+              <div class="mockup-title">Modo Claro y Oscuro</div>
+              <div class="mockup-text">Elige la apariencia ideal para tu estilo.</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES GRID -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-12 col-md-4">
+        <div class="feature-card p-4 h-100 fade-in">
+          <div class="feature-icon">✨</div>
+          <h5>Diseño llamativo</h5>
+          <p class="text-muted small mb-0">Interfaz con gradientes y microinteracciones para destacar acciones importantes.</p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="feature-card p-4 h-100 fade-in">
+          <div class="feature-icon">🔎</div>
+          <h5>Búsqueda instantánea</h5>
+          <p class="text-muted small mb-0">Filtra por etiquetas o texto y encuentra lo que necesitas al instante.</p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="feature-card p-4 h-100 fade-in">
+          <div class="feature-icon">🔒</div>
+          <h5>Control de acceso</h5>
+          <p class="text-muted small mb-0">Privacidad garantizada. Cada usuario ve solo sus notas.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band py-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <h5 class="mb-1">¿Listo para organizar mejor tus ideas?</h5>
+      <p class="small text-muted mb-0">Crea una cuenta gratis y prueba todas las funciones.</p>
+    </div>
+    <div>
+      <a class="btn btn-cta btn-ripple" href="{{ url_for('register') }}">Crear cuenta gratuita</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="py-5">
+  <div class="container">
+    <h6 class="text-uppercase small text-muted mb-3">Opiniones (Demo)</h6>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-4 fade-in">
+        <div class="testimonial p-4">
+          <p class="small mb-2">"NoteSpace hace que organizar el proyecto final sea increíblemente fácil."</p>
+          <div class="small text-muted">— María, UX</div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 fade-in">
+        <div class="testimonial p-4">
+          <p class="small mb-2">"Ligero, rápido y con un diseño impecable."</p>
+          <div class="small text-muted">— Carlos, Backend</div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 fade-in">
+        <div class="testimonial p-4">
+          <p class="small mb-2">"Perfecto para presentar: se ve profesional y consistente."</p>
+          <div class="small text-muted">— Sofía, Documentación</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

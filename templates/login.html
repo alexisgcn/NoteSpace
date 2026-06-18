@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Iniciar sesión — NoteSpace{% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-5">
+        <div class="card p-4 p-md-5 auth-card">
+          <div class="mb-3 text-center">
+            <div class="brand-mark mb-2">NS</div>
+            <h2 class="mb-1">Bienvenido de vuelta</h2>
+            <p class="text-muted small mb-0">
+              Entra para seguir organizando tus ideas en NoteSpace.
+            </p>
+          </div>
+
+          <form method="POST" novalidate>
+            {{ form.hidden_tag() }}
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label">{{ form.email.label }}</label>
+              {{ form.email(class="form-control", placeholder="tucorreo@ejemplo.com") }}
+              {% for err in form.email.errors %}
+                <div class="invalid-feedback d-block">{{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label">{{ form.password.label }}</label>
+              {{ form.password(class="form-control", placeholder="••••••••") }}
+              {% for err in form.password.errors %}
+                <div class="invalid-feedback d-block">{{ err }}</div>
+              {% endfor %}
+            </div>
+
+            <!-- Remember -->
+            <div class="mb-3 form-check">
+              {{ form.remember(class="form-check-input") }}
+              <label class="form-check-label" for="{{ form.remember.id }}">
+                {{ form.remember.label.text }}
+              </label>
+            </div>
+
+            <div class="d-grid mb-2">
+              <button class="btn btn-primary btn-ripple">
+                {{ form.submit.label.text }}
+              </button>
+            </div>
+
+            <p class="text-center small text-muted mb-0 auth-alt-link">
+              ¿Aún no tienes cuenta?
+              <a href="{{ url_for('register') }}">Crear cuenta</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Hola, {{ current_user.name }}</h2>
+    <div>
+      <a class="btn btn-success me-2" href="{{ url_for('notes_new') }}">Crear nota</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('notes_list') }}">Ver todas</a>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <p class="mb-1">Tienes <strong>{{ count }}</strong> notas activas.</p>
+  </div>
+
+  <h5>Recientes</h5>
+  {% if recent %}
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+      {% for note in recent %}
+        <div class="col">
+          <a href="{{ url_for('notes_detail', note_id=note.id) }}" class="text-decoration-none text-reset">
+            <div class="card h-100">
+              <div class="card-body">
+                <h6 class="card-title">{{ note.title }}</h6>
+                <p class="card-text text-truncate">{{ note.content or '— sin contenido —' }}</p>
+                {% if note.tags %}
+                  <div>
+                    {% for t in note.tags.split(',') %}
+                      <span class="badge bg-secondary">{{ t }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">No tienes notas recientes.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Mis notas — NoteSpace{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <h2 class="mb-0">Mis notas <span class="badge bg-secondary ms-2">{{ notes|length }}</span></h2>
+    <p class="text-muted small mb-0">Organiza tus ideas con etiquetas y búsqueda rápida.</p>
+  </div>
+
+  <div class="d-flex gap-2 align-items-center">
+    <form class="d-flex align-items-center" method="GET" action="{{ url_for('notes_list') }}">
+      {% if q %}
+        <input type="hidden" name="q" value="{{ q }}">
+      {% endif %}
+      {% if tag %}
+        <input type="hidden" name="tag" value="{{ tag }}">
+      {% endif %}
+      <label class="me-2 small text-muted mb-0">Orden:</label>
+      <!-- Replace existing form with this JS-driven selector -->
+      <div class="d-flex align-items-center">
+        <label class="me-2 small text-muted mb-0">Orden:</label>
+        <select id="order-select" class="form-select form-select-sm me-2">
+          <option value="" {% if not request.args.get('order') %}selected{% endif %}>Predeterminado</option>
+          <option value="new" {% if request.args.get('order') == 'new' %}selected{% endif %}>Más recientes</option>
+          <option value="old" {% if request.args.get('order') == 'old' %}selected{% endif %}>Más antiguas</option>
+          <option value="title" {% if request.args.get('order') == 'title' %}selected{% endif %}>Título A → Z</option>
+        </select>
+      </div>
+
+      <script>
+        // JS para redirigir preservando q y tag (si existen)
+        document.getElementById('order-select').addEventListener('change', function () {
+          const order = this.value;
+          const params = new URLSearchParams(window.location.search);
+          if (order) params.set('order', order);
+          else params.delete('order');
+          // preserva q y tag si ya estaban en la URL
+          const base = "{{ url_for('notes_list') }}";
+          const qs = params.toString();
+          const url = qs ? `${base}?${qs}` : base;
+          window.location.href = url;
+        });
+      </script>
+
+    </form>
+
+    <a class="btn btn-outline-secondary btn-sm btn-ripple" href="{{ url_for('trash_list') }}">Papelera</a>
+    <a class="btn btn-primary btn-sm btn-ripple" href="{{ url_for('notes_new') }}">Nueva nota</a>
+  </div>
+</div>
+
+{% if notes %}
+  <div class="row g-3">
+    {% for note in notes %}
+      <div class="col-12 col-sm-6 col-md-4 fade-in">
+        <article class="card note-card h-100">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start">
+              <h5 class="note-title mb-2 text-truncate">{{ note.title }}</h5>
+              <small class="text-muted small">{{ note.updated_at.strftime('%Y-%m-%d') }}</small>
+            </div>
+
+            <p class="note-excerpt text-muted mb-3 text-truncate">{{ note.content or '— sin contenido —' }}</p>
+
+            <div class="mt-auto d-flex justify-content-between align-items-center">
+              <div class="tags-group">
+                {% if note.tags %}
+                  {% for t in note.tags.split(',') %}
+                    <a class="badge badge-accent me-1" href="{{ url_for('notes_list') }}?tag={{ t }}">{{ t }}</a>
+                  {% endfor %}
+                {% endif %}
+              </div>
+
+              <div class="btn-group">
+                <a href="{{ url_for('notes_detail', note_id=note.id) }}" class="btn btn-sm btn-outline-primary btn-ripple">Ver</a>
+                <form method="POST" action="{{ url_for('notes_delete', note_id=note.id) }}" class="d-inline" onsubmit="return confirm('Enviar nota a la papelera?');">
+                  <button class="btn btn-sm btn-outline-danger btn-ripple">Borrar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card p-4">
+    <p class="mb-0 text-muted">Aún no tienes notas. Crea una nueva para empezar a organizar tus ideas.</p>
+  </div>
+{% endif %}
+{% endblock %}

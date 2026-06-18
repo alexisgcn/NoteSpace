@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Nota compartida — NoteSpace{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card p-4">
+      <div class="mb-2">
+        <small class="badge bg-secondary-subtle text-secondary">
+          Nota compartida desde NoteSpace
+        </small>
+      </div>
+      <h2 class="mb-2">{{ note.title }}</h2>
+
+      <small class="text-muted d-block mb-3">
+        Creada: {{ note.created_at.strftime('%Y-%m-%d %H:%M') }}
+        · Última edición: {{ note.updated_at.strftime('%Y-%m-%d %H:%M') }}
+      </small>
+
+      <div class="mb-3">
+        {% if note.tags %}
+          {% for t in note.tags.split(',') %}
+            <span class="badge badge-accent me-1">{{ t }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <p class="mb-0" style="white-space: pre-wrap;">
+            {{ note.content or '— Sin contenido —' }}
+          </p>
+        </div>
+      </div>
+
+      <p class="small text-muted mb-0">
+        Esta nota fue compartida por un usuario de <strong>NoteSpace</strong>.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
