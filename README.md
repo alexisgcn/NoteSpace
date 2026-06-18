@@ -41,7 +41,7 @@ Aplicación web de gestión de notas personales desarrollada como proyecto unive
 
 ```bash
 # 1. Clona el repositorio
-git clone https://github.com/tu-usuario/NoteSpace.git
+git clone https://github.com/alexisgcn/NoteSpace.git
 cd NoteSpace
 
 # 2. Crea y activa el entorno virtual
@@ -100,7 +100,7 @@ NoteSpace/
 
 Alexis Carmona
 
-Proyecto desarrollado para la materia de **Interacción Hombre-Máquina**.
+Proyecto desarrollado para la asignatura de **Interacción Hombre-Máquina** — Técnico Superior en Desarrollo de Software, Instituto Técnico Superior Comunitario (ITSC)
 
 ---
 
