@@ -1,3 +1,5 @@
 venv/ linguist-vendored
 __pycache__/ linguist-vendored
 *.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
